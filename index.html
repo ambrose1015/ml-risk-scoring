@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Risk-Scoring System Portfolio - Ambrose Jacob</title>
+    <meta name="description" content="Enterprise ML risk-scoring system processing 1M+ daily transactions across 5 East African countries with 89% accuracy.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        
+        .author {
+            font-size: 1.1em;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+        
+        .intro {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .intro h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.8em;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px 0;
+            font-size: 2em;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .portfolio-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            animation: fadeInUp 1s ease-out both;
+        }
+        
+        .portfolio-card:nth-child(1) { animation-delay: 0.1s; }
+        .portfolio-card:nth-child(2) { animation-delay: 0.2s; }
+        .portfolio-card:nth-child(3) { animation-delay: 0.3s; }
+        .portfolio-card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .portfolio-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .portfolio-card p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .download-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 50px 40px;
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+        
+        .download-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.95);
+            color: #667eea;
+            padding: 18px 45px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary:hover {
+            background: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+        
+        .tech-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .tech-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .tech-section h3 {
+            font-size: 1.3em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .tech-section ul {
+            margin-left: 30px;
+            margin-top: 10px;
+        }
+        
+        .tech-section li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            margin-top: 60px;
+        }
+        
+        footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        footer a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .stat-value {
+                font-size: 2em;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ML Risk-Scoring System</h1>
+            <p class="subtitle">Enterprise AI for Compliance & Fraud Detection</p>
+            <p class="author">Portfolio Project by Ambrose Jacob</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Project Overview</h2>
+            <p>
+                This portfolio demonstrates the development and deployment of an enterprise-grade machine learning 
+                risk-scoring system for multinational corporations and financial services clients across five East 
+                African countries (Kenya, Uganda, Tanzania, Rwanda, Zambia).
+            </p>
+            
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-value">89.3%</div>
+                    <div class="stat-label">Model Accuracy</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">1M+</div>
+                    <div class="stat-label">Daily Transactions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">60%</div>
+                    <div class="stat-label">Efficiency Gain</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Jurisdictions</div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 25px;">
+                The system combines <strong>XGBoost, Neural Networks, and Isolation Forest</strong> algorithms to identify 
+                high-risk transactions, regulatory compliance anomalies, and cross-border transfer pricing risks 
+                with exceptional accuracy. It processes over 1 million transactions daily with sub-100ms latency.
+            </p>
+        </div>
+        
+        <h2 class="section-title">Interactive Demonstrations</h2>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <span class="card-icon">🏗️</span>
+                <h3>System Architecture</h3>
+                <p>
+                    Explore the complete 4-layer microservices architecture including data ingestion, 
+                    feature engineering, ML inference, and visualization layers.
+                </p>
+                <a href="architecture_diagram.html" class="btn">View Architecture</a>
+            </div>
+            
+            <div class="portfolio-card">
+                <span class="card-icon">📊</span>
+                <h3>Risk Dashboard</h3>
+                <p>
+                    Interactive real-time monitoring dashboard with live statistics, geographic breakdowns, 
+                    trend analysis, and high-risk alerts.
+                </p>
+                <a href="risk_dashboard.html" class="btn">Open Dashboard</a>
+            </div>
+            
+            <div class="portfolio-card">
+                <span class="card-icon">📈</span>
+                <h3>Model Performance</h3>
+                <p>
+                    Comprehensive ML analysis including confusion matrix, ROC curves, precision-recall, 
+                    and SHAP feature importance visualization.
+                </p>
+                <a href="model_performance.html" class="btn">View Performance</a>
+            </div>
+            
+            <div class="portfolio-card">
+                <span class="card-icon">🔍</span>
+                <h3>Transaction Detail</h3>
+                <p>
+                    Deep dive into individual high-risk transaction analysis with SHAP explanations, 
+                    risk factors, and recommended actions.
+                </p>
+                <a href="transaction_detail.html" class="btn">See Example</a>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h2>📄 Complete Project Documentation</h2>
+            <p style="max-width: 800px; margin: 0 auto;">
+                Download the comprehensive 20+ page case study covering problem statement, system architecture, 
+                technical implementation, business impact metrics, code samples, and lessons learned.
+            </p>
+            <a href="ML_Risk_Scoring_Portfolio_Project.docx" download class="btn-primary">
+                Download Full Documentation (DOCX)
+            </a>
+        </div>
+        
+        <div class="tech-section">
+            <h2>Key Technologies & Expertise</h2>
+            <p style="margin-bottom: 20px;">
+                <strong>Machine Learning & AI:</strong> Python (pandas, scikit-learn, XGBoost, TensorFlow), 
+                R (statistical modeling, survival analysis), 150+ engineered features, ensemble modeling<br><br>
+                
+                <strong>Infrastructure & Cloud:</strong> AWS (EC2, S3, Lambda, SageMaker, RDS), PostgreSQL, 
+                Redis caching, Apache Spark for batch processing<br><br>
+                
+                <strong>Data Processing:</strong> ETL pipelines, real-time stream processing with Kafka, 
+                FastAPI for <100ms inference latency<br><br>
+                
+                <strong>Visualization & BI:</strong> Plotly, D3.js, Tableau, Power BI, custom interactive dashboards
+            </p>
+            
+            <h3>Applicability to Revenue Administration</h3>
+            <p style="margin-bottom: 15px;">
+                This system's methodologies directly apply to public sector revenue administration:
+            </p>
+            <ul>
+                <li><strong>Tax Compliance Risk Management:</strong> Automated taxpayer risk scoring for audit selection and prioritization</li>
+                <li><strong>Customs Fraud Detection:</strong> Real-time analysis of import/export declarations for valuation anomalies</li>
+                <li><strong>Transfer Pricing Analysis:</strong> Identification of below-market inter-company transactions across jurisdictions</li>
+                <li><strong>Revenue Leakage Detection:</strong> Pattern recognition for tax evasion, underreporting, and non-compliance</li>
+                <li><strong>Compliance Automation:</strong> 60% reduction in manual review workload while improving detection accuracy by 34%</li>
+            </ul>
+            
+            <p style="margin-top: 20px; font-style: italic;">
+                The same machine learning techniques that identify corporate compliance risks can be adapted 
+                to strengthen revenue collection, reduce tax gaps, and improve fiscal administration efficiency 
+                for government revenue authorities.
+            </p>
+        </div>
+        
+        <footer>
+            <h3>Contact Information</h3>
+            <p style="margin-bottom: 15px;">
+                <strong>Ambrose Jacob</strong><br>
+                Data Scientist & ML Engineer<br>
+                Specializing in AI for Compliance, Risk Management & Revenue Administration
+            </p>
+            <p style="margin-bottom: 20px;">
+                Email: jacob.aboge@gmail.com<br>
+                Phone: +254 710 552204
+            </p>
+            <p>
+                <a href="https://linkedin.com/in/ambrose-jacob" target="_blank">LinkedIn</a> |
+                <a href="https://github.com/ambrose-jacob" target="_blank">GitHub</a> |
+                <a href="mailto:jacob.aboge@gmail.com">Email</a>
+            </p>
+            <p style="margin-top: 30px; opacity: 0.7; font-size: 0.9em;">
+                © 2025 Ambrose Jacob. All rights reserved.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
